@@ -10,3 +10,7 @@ int getTime() {
     auto t = high_resolution_clock::now();
     return duration_cast<milliseconds>(t.time_since_epoch()).count();
 }
+
+int sort2DvectorColumnWise(vector<vector<int>>& v, int col) {
+    sort(v.begin(), v.end(), [&col](const vector<int> &a, const vector<int> &b) { return a[col] < b[col]; });
+}

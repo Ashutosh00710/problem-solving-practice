@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include "../utilities.h"
 using namespace std;
 
 class Solution {
@@ -7,8 +8,7 @@ public:
         const int row = intervals.size();
         if (row == 0) return intervals;
         vector<vector<int>> result;
-        sort(intervals.begin(), intervals.end(), [](const vector<int> &a, const vector<int> &b)
-             { return a[0] < b[0]; });
+        sort2DvectorColumnWise(intervals, 0);
         result.push_back(intervals[0]);
         for (int i = 0; i < row; i++) {
           if (result.back()[1] < intervals[i][0]) result.push_back(intervals[i]);
