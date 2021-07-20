@@ -7,20 +7,25 @@ class Solution {
 public:
     // using while loop
     int search(vector<int>& nums, int target) {
-        int n = nums.size();
-        int low = 0;
-        int high = n-1;
+        int n = nums.size(), low = 0, high = n-1;
         while(low <= high){
             int mid = (low + high)/2;
+            // check if the mid is the target
             if(nums[mid] == target) return mid;
+            // check if left portion is sorted
             if(nums[low] <= nums[mid]) {
-                if(target < nums[mid] && target >= nums[low]) high = mid - 1;
-                low = mid + 1;
+                // check if target is in left portion
+                if(target >= nums[low] && target <= nums[mid]) high = mid - 1;
+                // if not in left portion, move low to mid + 1
+                else low = mid + 1;
             } else {
-                if(target>nums[mid] && target<nums[low]) low = mid+1;
-                high = mid-1;
+                // check if target is in right portion
+                if(target >= nums[mid] && target <= nums[high]) low = mid + 1;
+                // if not in right portion, move high to mid - 1
+                else high = mid - 1;
             }
         }
+        // if not found
         return -1;
     }
     // using recursion and lamda function
