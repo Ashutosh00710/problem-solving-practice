@@ -97,3 +97,51 @@ int upperBound(int v[], int n, int key) {
     }
     return low;
 }
+
+template<typename T>
+int merge(T arr, int low, int mid, int high) {
+    int *temp = new int[high - low + 1];
+    int i = low, j = mid + 1, k = 0;
+    while(i <= mid && j <= high)
+    {
+        if(arr[i] <= arr[j])
+        {
+            temp[k] = arr[i];
+            i++;
+        }
+        else
+        {
+            temp[k] = arr[j];
+            j++;
+        }
+        k++;
+    }
+    while(i <= mid)
+    {
+        temp[k] = arr[i];
+        k++;
+        i++;
+    }
+    while(j <= high)
+    {
+        temp[k] = arr[j];
+        k++;
+        j++;
+    }
+    for(int i = low; i <= high; i++)
+        arr[i] = temp[i - low];
+    delete[] temp;
+    return 0;
+}
+
+template<typename T>
+int mergesort(T arr, int low, int high) {
+    if(low < high)
+    {
+        int mid = (low + high) / 2;
+        mergesort(arr, low, mid);
+        mergesort(arr, mid + 1, high);
+        merge(arr, low, mid, high);
+    }
+    return 0;
+}
