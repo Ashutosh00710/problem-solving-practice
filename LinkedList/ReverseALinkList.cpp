@@ -30,14 +30,20 @@ public:
         // recursively reverse the rest of the list
         // and then connect the reversed list to the head
         // of the original list
-        ListNode *previous = reverseList(head->next);
+        ListNode *previous = reverseListR(head->next);
         // example:
-        //                      head->next->next
-        //                        ___⬇____
+        //                      head->next->next = head
+        //                        ____⬇___
         //                       ⬇      ⬆
         // [1] -> [2] -> [3] -> [4] -> [5]
-        //                             ⬆
-        //                           head
+        //                      ⬆
+        //                     head
+        //                      head->next->next = head
+        //                        ____⬇___
+        //                       ⬇      ⬆
+        // [1] -> [2] -> [3] -> [4] <- [5]
+        //                      ⬆
+        //                     head
         head->next->next = head;
         head->next = NULL;
         return previous;
