@@ -91,6 +91,9 @@ class Solution {
     }
 
     // Approach 2 O(n)
+    // Instead of calling height (which is recursive itself) on every
+    // recursive call of diameter, calculate the height with diameter
+    // call
     pair<int /*height*/, int /*diameter*/> findDiameter(Node* root) {
       if (root == NULL) return {0, 0};
 
