@@ -174,3 +174,80 @@ vector<int> rightView(Node *root) {
   rightView(root, ans, 1, maxLevel);
   return ans;
 }
+
+// ---------------------------- FOR TOP VIEW -----------------------------
+
+vector<vector<int>> verticalOrderTraversal(Node *root) {
+    vector<vector<int>> ans;
+    queue<pair<Node*, int /*horizontal level*/>> q;
+    map<int, vector<int> /*nodes on horizontal level*/> m;
+    q.push({root, 0});
+    int maxHl = 0, minHl = 0;
+    while(!q.empty()) {
+        int size = q.size();
+        // Traverse all nodes of current level
+        while (size--) {
+            // Get the current node
+            pair<Node*, int> removePair = q.front();
+            q.pop();
+
+            // Get the current node's horizontal level to update minimun and maximun horizontal level
+            maxHl = max(maxHl, removePair.second);
+            minHl = min(minHl, removePair.second);
+
+            // Add the current node to the map
+            m[removePair.second].push_back(removePair.first->data);
+
+            // Add left node to queue
+            if(removePair.first->left) {
+                q.push({removePair.first->left, removePair.second - 1});
+            }
+
+            // Add right node to queue
+            if(removePair.first->right) {
+              q.push({removePair.first->right, removePair.second + 1});
+            }
+        }
+    }
+
+    // Traverse the map to get the vertical order traversal
+    for (int i = minHl; i <= maxHl; i++) {
+        ans.push_back(m[i]);
+    }
+
+    // Return the vertical order traversal
+    return ans;
+}
+
+vector<int> topView(Node *root) {
+    vector<int> ans;
+    queue<pair<Node*, int>> q;
+    map<int, vector<int>> m;
+    q.push({root, 0});
+    int maxHl = 0, minHl = 0;
+    while(!q.empty()) {
+        int size = q.size();
+        while (size--) {
+            pair<Node*, int> removePair = q.front();
+            q.pop();
+
+            maxHl = max(maxHl, removePair.second);
+            minHl = min(minHl, removePair.second);
+
+            m[removePair.second].push_back(removePair.first->data);
+
+            if(removePair.first->left) {
+                q.push({removePair.first->left, removePair.second - 1});
+            }
+
+            if(removePair.first->right) {
+              q.push({removePair.first->right, removePair.second + 1});
+            }
+        }
+    }
+
+    for (int i = minHl; i <= maxHl; i++) {
+        ans.push_back(m[i][0]);
+    }
+    return ans;
+}

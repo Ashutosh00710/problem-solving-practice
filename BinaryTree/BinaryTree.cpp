@@ -199,6 +199,50 @@ void levelorder(BinaryTree<T> *root) {
     }
 }
 
+// vertical order traversal
+template <typename T>
+vector<vector<T>> verticalOrderTraversal(BinaryTree<T> *root) {
+    vector<vector<T>> ans;
+    queue<pair<BinaryTree<T>*, int /*horizontal level*/>> q;
+    map<int, vector<T> /*nodes on horizontal level*/> m;
+    q.push({root, 0});
+    int maxHl = 0, minHl = 0;
+    while(!q.empty()) {
+        int size = q.size();
+        // Traverse all nodes of current level
+        while (size--) {
+            // Get the current node
+            pair<BinaryTree<T>*, int> removePair = q.front();
+            q.pop();
+
+            // Get the current node's horizontal level to update minimun and maximun horizontal level
+            maxHl = max(maxHl, removePair.second);
+            minHl = min(minHl, removePair.second);
+
+            // Add the current node to the map
+            m[removePair.second].push_back(removePair.first->getData());
+
+            // Add left node to queue
+            if(removePair.first->getLeft()) {
+                q.push({removePair.first->getLeft(), removePair.second - 1});
+            }
+
+            // Add right node to queue
+            if(removePair.first->getRight()) {
+              q.push({removePair.first->getRight(), removePair.second + 1});
+            }
+        }
+    }
+
+    // Traverse the map to get the vertical order traversal
+    for (int i = minHl; i <= maxHl; i++) {
+        ans.push_back(m[i]);
+    }
+
+    // Return the vertical order traversal
+    return ans;
+}
+
 // create a main() to run the program
 int main() {
     BinaryTree<int> *root = new BinaryTree<int>(1);
@@ -214,6 +258,14 @@ int main() {
     BinaryTree<int> *node10 = new BinaryTree<int>(11);
     BinaryTree<int> *node11 = new BinaryTree<int>(12);
     BinaryTree<int> *node12 = new BinaryTree<int>(13);
+
+    //                       1
+    //                   /       \
+    //                  2         3
+    //                /   \      /   \
+    //               4     5    6     7
+    //              / \   / \   / \   / \
+    //             8   9 10 11 12 13 14 15
 
     root->setLeft(node1);
     root->setRight(node2);
@@ -250,5 +302,23 @@ int main() {
     cout << "Postorder traversal of the tree is: ";
     postorder(root);
     cout << endl;
+    cout << "Levelorder traversal of the tree is: ";
+    levelorder(root);
+    cout << endl;
+    cout << "Vertical order traversal of the tree is: ";
+    vector<vector<int>> ans = verticalOrderTraversal(root);
+    cout << "[";
+    string s = "";
+    for (int i = 0; i < ans.size(); i++) {
+        cout <<s<< "[";
+        string str = "";
+        for (int j = 0; j < ans[i].size(); j++) {
+            cout <<str<< ans[i][j];
+            str = ", ";
+        }
+        cout << "]";
+        s = ", ";
+    }
+    cout << "]";
     return 0;
 }
