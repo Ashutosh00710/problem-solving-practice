@@ -243,6 +243,37 @@ vector<vector<T>> verticalOrderTraversal(BinaryTree<T> *root) {
     return ans;
 }
 
+// zig zag traversal
+template <typename T>
+void zigzagLevelOrderTraversal(BinaryTree<T> *root) {
+    stack<BinaryTree<T>*> ms;
+    ms.push(root);
+    stack<BinaryTree<T> *> cs;
+    int level = 1;
+    while(!ms.empty()) {
+        BinaryTree<T> *temp = ms.top();
+        ms.pop();
+
+        cout<<temp->getData()<<" ";
+
+        // if the current level is odd
+        // move left to right
+        if(level % 2 == 1) {
+            if(temp->getLeft()) cs.push(temp->getLeft());
+            if(temp->getRight()) cs.push(temp->getRight());
+        } else {
+            // else move right to left
+            if(temp->getRight()) cs.push(temp->getRight());
+            if(temp->getLeft()) cs.push(temp->getLeft());
+        }
+
+        if(ms.empty()) {
+            swap(ms, cs);
+            level++;
+        }
+    }
+}
+
 // create a main() to run the program
 int main() {
     BinaryTree<int> *root = new BinaryTree<int>(1);
@@ -259,14 +290,15 @@ int main() {
     BinaryTree<int> *node11 = new BinaryTree<int>(12);
     BinaryTree<int> *node12 = new BinaryTree<int>(13);
 
-    //                       1
-    //                   /       \
-    //                  2         3
-    //                /   \      /   \
-    //               4     5    6     7
-    //              / \   / \   / \   / \
-    //             8   9 10 11 12 13 14 15
-
+    /*
+                            1
+                        /      \
+                      2         3
+                    /   \      /   \
+                   4     5    6     7
+                  / \   / \   / \
+                 8   9 10 11 12 13
+    */
     root->setLeft(node1);
     root->setRight(node2);
     node1->setLeft(node3);
@@ -320,5 +352,8 @@ int main() {
         s = ", ";
     }
     cout << "]";
+    cout << endl;
+    cout << "Zigzag level order traversal of the tree is: ";
+    zigzagLevelOrderTraversal(root);
     return 0;
 }
