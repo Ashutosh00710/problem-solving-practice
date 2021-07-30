@@ -145,3 +145,22 @@ int mergesort(T arr, int low, int high) {
     }
     return 0;
 }
+
+template<typename T>
+void display2Dvector(vector<vector<T>>& v, bool isString = false) {
+    int m = v.size();
+      string str = "";
+      cout << "[";
+      for (int i = 0; i < m; i++) {
+          cout << str << "[";
+          string s = "";
+          for (auto it : v[i]) {
+              if(isString) cout << s<<"\"" << it << "\"";
+              else cout << s << it;
+              s = ", ";
+          }
+          cout << "]";
+          str = ", ";
+      }
+      cout << "]";
+}

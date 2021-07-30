@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include "../utilities.h"
 
 using namespace std;
 
@@ -38,30 +39,13 @@ class Solution {
       return ans;
   }
   // recursive approach end
-
-  void display(vector<vector<string>> arr) {
-      int m = arr.size();
-      string str = "";
-      cout << "[";
-      for (int i = 0; i < m; i++) {
-          cout << str << "[";
-          string s = "";
-          for (auto it : arr[i]) {
-              cout << s<<" \"" << it << "\" ";
-              s = ", ";
-          }
-          cout << "]";
-          str = ", ";
-      }
-      cout << "]";
-  }
 };
 
 int main() {
     string str = "aab";
     Solution s;
     vector<vector<string>> ans = s.partition(str);
-    s.display(ans);
+    display2Dvector(ans, true);
     return 0;
 }
 

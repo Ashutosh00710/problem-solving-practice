@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include "../utilities.h"
 
 using namespace std;
 
@@ -27,30 +28,13 @@ class Solution {
       findCombinations(0, target);
       return ans;
   }
-
-  void display(vector<vector<int>> arr) {
-      int m = arr.size();
-      string str = "";
-      cout << "[";
-      for (int i = 0; i < m; i++) {
-          cout << str << "[";
-          string s = "";
-          for (auto it : arr[i]) {
-              cout << s << it;
-              s = ", ";
-          }
-          cout << "]";
-          str = ", ";
-      }
-      cout << "]";
-  }
 };
 
 int main() {
     vector<int> test1{2, 3, 6, 7};
     Solution s;
     vector<vector<int>> ans = s.combinationSum(test1, 7);
-    s.display(ans);
+    display2Dvector(ans);
     return 0;
 }
 
