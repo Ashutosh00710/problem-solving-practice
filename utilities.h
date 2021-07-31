@@ -162,5 +162,5 @@ void display2Dvector(vector<vector<T>>& v, bool isString = false) {
           cout << "]";
           str = ", ";
       }
-      cout << "]";
+      cout << "]"<<"\n";
 }
