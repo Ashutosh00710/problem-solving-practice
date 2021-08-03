@@ -164,3 +164,15 @@ void display2Dvector(vector<vector<T>>& v, bool isString = false) {
       }
       cout << "]"<<"\n";
 }
+
+template<typename T>
+void displayVector(vector<T>& v, bool isString = false) {
+    string s = "";
+    cout << "[";
+    for (auto it : v) {
+        if(isString) cout << s<<"\"" << it << "\"";
+        else cout << s << it;
+        s = ", ";
+    }
+    cout << "]"<<"\n";
+}
