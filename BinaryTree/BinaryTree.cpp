@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-
+#include "../utilities.h"
 using namespace std;
 
 template <typename T>
@@ -339,20 +339,7 @@ int main() {
     cout << endl;
     cout << "Vertical order traversal of the tree is: ";
     vector<vector<int>> ans = verticalOrderTraversal(root);
-    cout << "[";
-    string s = "";
-    for (int i = 0; i < ans.size(); i++) {
-        cout <<s<< "[";
-        string str = "";
-        for (int j = 0; j < ans[i].size(); j++) {
-            cout <<str<< ans[i][j];
-            str = ", ";
-        }
-        cout << "]";
-        s = ", ";
-    }
-    cout << "]";
-    cout << endl;
+    display2Dvector(ans);
     cout << "Zigzag level order traversal of the tree is: ";
     zigzagLevelOrderTraversal(root);
     return 0;

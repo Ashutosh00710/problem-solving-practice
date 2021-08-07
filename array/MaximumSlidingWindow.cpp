@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include "../utilities.h"
 using namespace std;
 
 class Solution {
@@ -28,14 +29,31 @@ public:
       return ans;
     }
 
-    void display(vector<int>& nums) {
-      cout << "[";
-      string str = "";
-      for(auto i : nums) {
-        cout <<str<< i;
-        str = ", ";
-      }
-      cout << "]"<<endl;
+    // Using Heap
+    // TLE (On GFG, LeetCode)
+    // O(K*log(K)) -> empty minHeap
+    // O(N*K) + O(K * log(K)) -> array traversal and pushing in heap
+    // Total TC: O(K*log(K)) + O(N*K) + O(K * log(K))
+    vector<int> maxSlidingWindow2(vector<int>& nums, int k) {
+        vector<int> ans;
+        size_t n = nums.size();
+        if(n == 1) return {nums[0]};
+        priority_queue<int> minHeap;
+        // O(K*log(K))
+        function<void()> emptyPq = [&]() -> void {
+            while(!minHeap.empty()) {
+                minHeap.pop();
+            }
+        };
+        // O(N*K) + O(K * log(K))
+        for (int i = 0; i <= n - k; i++) {
+            for (int j = i; j < i + k; j++) {
+                minHeap.push(nums[j]);
+            }
+            ans.push_back(minHeap.top());
+            emptyPq();
+        }
+        return ans;
     }
 };
 
@@ -47,13 +65,13 @@ int main() {
   vector<int> test4{9,11};
   vector<int> test5{4,-2};
   vector<int> ans = s.maxSlidingWindow(test1, 3);
-  s.display(ans);
+  displayVector(ans);
   ans = s.maxSlidingWindow(test2, 1);
-  s.display(ans);
+  displayVector(ans);
   ans = s.maxSlidingWindow(test3, 1);
-  s.display(ans);
+  displayVector(ans);
   ans = s.maxSlidingWindow(test4, 2);
-  s.display(ans);
+  displayVector(ans);
   ans = s.maxSlidingWindow(test5, 2);
-  s.display(ans);
+  displayVector(ans);
 }
