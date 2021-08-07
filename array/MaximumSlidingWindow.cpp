@@ -28,29 +28,32 @@ public:
 
       return ans;
     }
-
-    // Using Heap
-    // TLE (On GFG, LeetCode)
-    // O(K*log(K)) -> empty minHeap
-    // O(N*K) + O(K * log(K)) -> array traversal and pushing in heap
-    // Total TC: O(K*log(K)) + O(N*K) + O(K * log(K))
+    /*
+      Using Heap
+      TLE (On GFG, LeetCode)
+      TC: O(N*K*log(K)) according to constrains it will reach ~ 10^14 operation approx
+      Constraints:
+        1 ≤ N ≤ 10^7
+        1 ≤ K ≤ N
+        0 ≤ arr[i] ≤ 10^7
+    */
     vector<int> maxSlidingWindow2(vector<int>& nums, int k) {
         vector<int> ans;
         size_t n = nums.size();
         if(n == 1) return {nums[0]};
         priority_queue<int> minHeap;
-        // O(K*log(K))
         function<void()> emptyPq = [&]() -> void {
             while(!minHeap.empty()) {
                 minHeap.pop();
             }
         };
-        // O(N*K) + O(K * log(K))
+        // O(N*Klog(K))
         for (int i = 0; i <= n - k; i++) {
             for (int j = i; j < i + k; j++) {
                 minHeap.push(nums[j]);
             }
             ans.push_back(minHeap.top());
+            // O(K * log(K))
             emptyPq();
         }
         return ans;
