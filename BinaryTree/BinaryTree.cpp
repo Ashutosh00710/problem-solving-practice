@@ -339,7 +339,7 @@ int main() {
     cout << endl;
     cout << "Vertical order traversal of the tree is: ";
     vector<vector<int>> ans = verticalOrderTraversal(root);
-    display2Dvector(ans);
+    cout << ans;
     cout << "Zigzag level order traversal of the tree is: ";
     zigzagLevelOrderTraversal(root);
     return 0;

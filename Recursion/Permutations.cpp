@@ -55,8 +55,8 @@ int main() {
     Solution s;
     vector<int> nums{1, 2, 3};
     vector<vector<int>> ans = s.permute(nums);
-    display2Dvector(ans);
+    cout << ans;
     ans = s.permute2(nums);
-    display2Dvector(ans);
+    cout << ans;
     return 0;
 }

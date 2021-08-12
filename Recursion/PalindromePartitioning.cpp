@@ -45,7 +45,7 @@ int main() {
     string str = "aab";
     Solution s;
     vector<vector<string>> ans = s.partition(str);
-    display2Dvector(ans, true);
+    cout << ans;
     return 0;
 }
 

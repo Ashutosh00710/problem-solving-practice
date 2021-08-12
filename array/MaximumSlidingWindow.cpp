@@ -68,13 +68,13 @@ int main() {
   vector<int> test4{9,11};
   vector<int> test5{4,-2};
   vector<int> ans = s.maxSlidingWindow(test1, 3);
-  displayVector(ans);
+  cout << ans;
   ans = s.maxSlidingWindow(test2, 1);
-  displayVector(ans);
+  cout << ans;
   ans = s.maxSlidingWindow(test3, 1);
-  displayVector(ans);
+  cout << ans;
   ans = s.maxSlidingWindow(test4, 2);
-  displayVector(ans);
+  cout << ans;
   ans = s.maxSlidingWindow(test5, 2);
-  displayVector(ans);
+  cout << ans;
 }

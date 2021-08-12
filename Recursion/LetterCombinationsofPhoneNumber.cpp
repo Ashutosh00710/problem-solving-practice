@@ -30,6 +30,6 @@ int main() {
     Solution s;
     string digits{"23"};
     vector<string> ans = s.letterCombinations(digits);
-    displayVector(ans, true);
+    cout << ans;
     return 0;
 }

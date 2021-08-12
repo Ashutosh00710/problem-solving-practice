@@ -28,6 +28,6 @@ int main() {
     vector<int> nums{1, 1, 2};
     Solution s;
     vector<vector<int>> ans = s.subsets2(nums);
-    display2Dvector(ans);
+    cout << ans;
     return 0;
 }

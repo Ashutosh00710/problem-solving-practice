@@ -34,7 +34,7 @@ int main() {
     Solution s;
     sort(test1.begin(), test1.end());
     vector<vector<int>> ans = s.combinationSum2(test1, 8);
-    display2Dvector(ans);
+    cout << ans;
     return 0;
 }
 

@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+#include "../utilities.h"
+
 using namespace std;
 
 class Solution {
@@ -18,16 +20,6 @@ public:
         }
         reverse(nums, i + 1, n - 1);
     }
-
-    void display(vector<int>& nums) {
-      cout << "[";
-      string str = "";
-      for(auto i : nums) {
-        cout <<str<< i;
-        str = ", ";
-      }
-      cout << "]"<<endl;
-    }
 };
 
 int main() {
@@ -37,12 +29,12 @@ int main() {
   vector<int> nums4{1};
   Solution s;
   s.nextPermutation(nums1);
-  s.display(nums1);
+  cout << nums1;
   s.nextPermutation(nums2);
-  s.display(nums2);
+  cout << nums2;
   s.nextPermutation(nums3);
-  s.display(nums3);
+  cout << nums3;
   s.nextPermutation(nums4);
-  s.display(nums4);
+  cout << nums4;
   return 0;
 }

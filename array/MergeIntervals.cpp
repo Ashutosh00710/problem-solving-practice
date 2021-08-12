@@ -16,16 +16,6 @@ public:
         }
         return result;
     }
-
-    void display(vector<vector<int>>& intervals) {
-      cout << "[";
-      string str = "";
-      for (auto interval : intervals) {
-        cout <<str<< "[" << interval[0] << "," << interval[1] << "]";
-        str = ", ";
-      }
-      cout << "]"<<endl;
-    }
 };
 
 int main() {
@@ -33,9 +23,9 @@ int main() {
   vector<vector<int>> intervals2{{1,4},{2,3}};
   Solution s;
   vector<vector<int>> ans = s.merge(intervals1);
-  s.display(ans);
+  cout << ans;
   ans = s.merge(intervals2);
-  s.display(ans);
+  cout << ans;
   return 0;
 }
 

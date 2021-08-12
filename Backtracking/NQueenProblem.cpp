@@ -62,6 +62,6 @@ public:
 int main() {
     Solution s;
     vector<vector<string>> ans = s.solveNQueens(4);
-    display2Dvector(ans, true);
+    cout<< ans;
     return 0;
 }

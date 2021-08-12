@@ -11,7 +11,7 @@ int getTime() {
     return duration_cast<milliseconds>(t.time_since_epoch()).count();
 }
 
-int sort2DvectorColumnWise(vector<vector<int>>& v, int col) {
+void sort2DvectorColumnWise(vector<vector<int>>& v, int col) {
     sort(v.begin(), v.end(), [&col](const vector<int> &a, const vector<int> &b) { return a[col] < b[col]; });
 }
 
@@ -147,32 +147,34 @@ int mergesort(T arr, int low, int high) {
 }
 
 template<typename T>
-void display2Dvector(vector<vector<T>>& v, bool isString = false) {
+ostream& operator<<(ostream &stream, vector<vector<T>>& v) {
     int m = v.size();
-      string str = "";
-      cout << "[";
-      for (int i = 0; i < m; i++) {
-          cout << str << "[";
-          string s = "";
-          for (auto it : v[i]) {
-              if(isString) cout << s<<"\"" << it << "\"";
-              else cout << s << it;
-              s = ", ";
-          }
-          cout << "]";
-          str = ", ";
-      }
-      cout << "]"<<"\n";
+    string str = "";
+    stream << "[";
+    for (int i = 0; i < m; i++) {
+        stream << str << "[";
+        string s = "";
+        for (auto it : v[i]) {
+            if (typeid(T) == typeid(string)) stream << s<<"\"" << it << "\"";
+            else stream << s << it;
+            s = ", ";
+        }
+        stream << "]";
+        str = ", ";
+    }
+    stream << "]"<<"\n";
+    return stream;
 }
 
 template<typename T>
-void displayVector(vector<T>& v, bool isString = false) {
+ostream& operator<<(ostream &stream, vector<T>& v) {
     string s = "";
-    cout << "[";
+    stream << "[";
     for (auto it : v) {
-        if(isString) cout << s<<"\"" << it << "\"";
-        else cout << s << it;
+        if (typeid(T) == typeid(string)) stream << s<<"\"" << it << "\"";
+        else stream << s << it;
         s = ", ";
     }
-    cout << "]"<<"\n";
+    stream << "]"<<"\n";
+    return stream;
 }
