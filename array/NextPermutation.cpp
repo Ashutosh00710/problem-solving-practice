@@ -14,7 +14,6 @@ public:
         int i = n - 2, j = n - 1;
         while (i >= 0 && nums[i] >= nums[i + 1]) --i;
         if (i >= 0) {
-            j = n - 1;
             while (j >= 0 && nums[i] >= nums[j]) --j;
             swap(nums[i], nums[j]);
         }
@@ -23,7 +22,7 @@ public:
 };
 
 int main() {
-  vector<int> nums1{1, 2, 3};
+  vector<int> nums1{1, 3, 5, 4, 2};
   vector<int> nums2{3, 2, 1};
   vector<int> nums3{1, 1, 5};
   vector<int> nums4{1};

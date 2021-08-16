@@ -10,7 +10,7 @@ class Solution {
       vector<int> ds;
       size_t s = arr.size();
       function<void(int, int)> findCombinations;
-      findCombinations = [&findCombinations, &ds, &ans, &arr, s](int idx, int target) mutable -> void {
+      findCombinations = [&](int idx, int target) mutable -> void {
         if (idx == s) return;
         if (target == 0) {
             ans.push_back(ds);
