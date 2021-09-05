@@ -44,6 +44,37 @@ int LCS(std::string str1, std::string str2, int m, int n, int **memo) {
   }
 }
 
+void reverse(std::string &s) {
+    int i = 0, j = s.length() - 1;
+    while(i < j) {
+        char temp = s[i];
+        s[i] = s[j];
+        s[j] = temp;
+        i++;
+        j--;
+    }
+}
+
+std::string PrintLCS(std::string str1, std::string str2, int **dp) {
+    std::string ans;
+    size_t i = str1.length(), j = str2.length();
+    while(i > 0 & j > 0) {
+      if(str1[i - 1] == str2[j - 1]) {
+          ans.push_back(str1[i - 1]);
+          i--;
+          j--;
+      } else {
+          if(dp[i - 1][j] > dp[i][j - 1]) {
+              i--;
+          } else {
+              j--;
+          }
+      }
+    }
+    reverse(ans);
+    return ans;
+}
+
 int LCSBottomUp(std::string str1, std::string str2, size_t m, size_t n) {
     int **dp = create_2D_array(m + 1, n + 1);
     for (int i = 0; i <= m; i++) {
@@ -61,6 +92,7 @@ int LCSBottomUp(std::string str1, std::string str2, size_t m, size_t n) {
         }
     }
 
+    std::cout << PrintLCS(str1, str2, dp) << "\n";
     return dp[m][n];
 }
 
